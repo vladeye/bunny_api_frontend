@@ -1,0 +1,51 @@
+<div fxLayout="column" fxFlex [class.dark-theme]="isDarkTheme">
+
+  <mat-toolbar color="primary">
+    <span>Bunny projects</span>
+
+    <!-- Filler that pushes the menu button to the end of the toolbar -->
+    <span fxFlex></span>
+
+    <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlex>
+    <mat-sidenav mode="side" opened>
+
+      <mat-tab-group>
+        <mat-tab label="Readings">
+          <mat-nav-list>
+            <mat-list-item *ngFor="let reading of readings" (click)="selectedReading = reading">
+              <h2>{{reading.id}}</h2>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-tab>
+        <md-tab label="Settings">
+          <span>Settings</span>
+        </md-tab>
+      </mat-tab-group>
+
+    </mat-sidenav>
+
+    <div *ngIf="readings.length > 0" class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px">
+
+      <mat-card fxFlex="80">
+        <h4>{{selectedReading.id}}</h4>
+        <h2>{{selectedReading.script}}</h2>
+        <p>{{selectedReading.reads}}</p>
+      </mat-card>
+
+
+
+    </div>
+  </mat-sidenav-container>
+
+  <mat-menu #themeMenu x-position="before">
+    <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
+  </mat-menu>
+
+
+</div>
